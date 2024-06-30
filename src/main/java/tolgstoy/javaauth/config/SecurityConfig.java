@@ -37,16 +37,14 @@ public class SecurityConfig {
 
     // Configuring HttpSecurity
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/auth/welcome").permitAll()
-                .and()
-                .authorizeHttpRequests().requestMatchers("/auth/user/**").authenticated()
-                .and()
-                .authorizeHttpRequests().requestMatchers("/auth/admin/**").authenticated()
-                .and().formLogin()
-                .and().build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf().disable()
+            .authorizeHttpRequests()
+            .anyRequest()
+            .authenticated()
+            .and()
+            .httpBasic();
+        return httpSecurity.build();
     }
 
     // Password Encoding
