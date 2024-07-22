@@ -14,8 +14,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
-@EnableMethodSecurity
+//@EnableWebSecurity
+//@EnableMethodSecurity
 public class SecurityConfig {
     // User Creation
     @Bean
@@ -43,7 +43,9 @@ public class SecurityConfig {
             .anyRequest()
             .authenticated()
             .and()
-            .httpBasic();
+            .httpBasic()
+                .and()
+                .cors();
         return httpSecurity.build();
     }
 
